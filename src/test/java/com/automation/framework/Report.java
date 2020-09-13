@@ -288,15 +288,15 @@ public class Report extends BaseClass {
 			// Add a line separator
 			document.add(new LineSeparator(0.5f, 100, null, 0, -5));
 
-			Image dxcLogo = Image.getInstance(currentDir + "\\dxc_logo.png");
+			Image reportLogo = Image.getInstance(currentDir + "\\Report.png");
 			// If image size exceeds a threshold value decrease it to below size
-			if ((dxcLogo.getWidth() > 525.00) | (dxcLogo.getHeight() > 500.00)) {
-				dxcLogo.scaleToFit(500, 600);
-				dxcLogo.setAlignment(dxcLogo.ALIGN_CENTER);
+			if ((reportLogo.getWidth() > 525.00) | (reportLogo.getHeight() > 500.00)) {
+				reportLogo.scaleToFit(500, 600);
+				reportLogo.setAlignment(reportLogo.ALIGN_CENTER);
 			}
 
 			// Add DXC Logo
-			document.add(dxcLogo);
+			document.add(reportLogo);
 
 			// Add a new page/ page break
 			document.newPage();

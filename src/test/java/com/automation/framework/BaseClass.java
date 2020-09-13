@@ -18,8 +18,8 @@ public class BaseClass {
 	public static Properties properties;
 	public static Properties mobileProperties;
 	Browser browser;
-	public static Report gl;
-	public DataTable dataTable;
+	public static Report report;
+	public static DataTable dataTable;
 	public com.aventstack.extentreports.ExtentReports extent;
 	public com.aventstack.extentreports.ExtentTest test;
 
@@ -50,8 +50,6 @@ public class BaseClass {
 	public BaseClass() {
 		properties = Settings.getInstance();
 		mobileProperties = Settings.getMobilePropertiesInstance();
-		dataTable = new DataTable(System.getProperty("user.dir") + "\\src\\test\\resources\\Datatables",
-				properties.getProperty("DataTableName"));
 	}
 
 	public static void intialization() {
@@ -69,8 +67,9 @@ public class BaseClass {
 
 	public static void initializeWebDriver(String executionMode, String toolName, String mobileExecutionPlatform,
 			String mobileOsVersion, String deviceName, String browser, String browserVersion, String platform,
-			String platformVersion) {
-
+			String platformVersion, String dataTableName) {
+		dataTable = new DataTable(System.getProperty("user.dir") + "\\src\\test\\resources\\Datatables",
+				dataTableName);
 		switch (executionMode.replace("\"", "")) {
 
 		case "API":

@@ -10,7 +10,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<selenium.standalone>3.141.59</selenium.standalone>
-		<java.client.appium>7.2.0</java.client.appium>
+		<java.client.appium>7.3.0</java.client.appium>
 		<org.testng>7.0.0</org.testng>
 		<source.and.target.JVM.version>1.8</source.and.target.JVM.version>
 		<org.apache.maven.plugins.maven-compiler-plugin.version>3.8.1</org.apache.maven.plugins.maven-compiler-plugin.version>

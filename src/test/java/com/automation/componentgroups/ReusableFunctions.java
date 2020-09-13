@@ -3,14 +3,17 @@ package com.automation.componentgroups;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -34,6 +37,7 @@ import org.sikuli.script.Screen;
 import com.automation.framework.BaseClass;
 import com.automation.framework.Report;
 import com.automation.framework.Status;
+import com.automation.framework.TestExecutionException;
 
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -50,8 +54,6 @@ import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 public class ReusableFunctions extends BaseClass {
 
 	WebDriverWait wait = new WebDriverWait(driver, 30);
-
-	// WebDriverUtil webdriverutil = new WebDriverUtil(driver);
 	public ReusableFunctions(String testcaseName) {
 		PageFactory.initElements(driver, this);
 		dataTable.setCurrentRow(testcaseName, 1, 1);
@@ -77,15 +79,14 @@ public class ReusableFunctions extends BaseClass {
 		try {
 			if (strFindElementType.equalsIgnoreCase("CSS")) {
 				try {
-					ele = wait.until(
-							ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector(strObjectProperty))));
+					ele = driver.findElement(By.cssSelector(strObjectProperty));
 				} catch (TimeoutException t) {
 					System.out.println("Did not find the Element within explicit wait time");
 				}
 				return ele;
 			} else if (strFindElementType.equalsIgnoreCase("XPATH")) {
 				try {
-					ele = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(strObjectProperty))));
+					ele = driver.findElement(By.xpath(strObjectProperty));
 				} catch (TimeoutException t) {
 					System.out.println("Did not find the Element within explicit wait time");
 				}
@@ -93,7 +94,7 @@ public class ReusableFunctions extends BaseClass {
 
 			} else if (strFindElementType.equalsIgnoreCase("ID")) {
 				try {
-					ele = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id(strObjectProperty))));
+					ele =driver.findElement(By.id(strObjectProperty));
 				} catch (TimeoutException t) {
 					System.out.println("Did not find the Element within explicit wait time");
 				}
@@ -101,7 +102,7 @@ public class ReusableFunctions extends BaseClass {
 
 			} else if (strFindElementType.equalsIgnoreCase("NAME")) {
 				try {
-					ele = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.name(strObjectProperty))));
+					ele = driver.findElement(By.id(strObjectProperty));
 				} catch (TimeoutException t) {
 					System.out.println("Did not find the Element within explicit wait time");
 				}
@@ -111,8 +112,7 @@ public class ReusableFunctions extends BaseClass {
 
 			else if (strFindElementType.equalsIgnoreCase("LINKTEXT")) {
 				try {
-					ele = wait
-							.until(ExpectedConditions.visibilityOf(driver.findElement(By.linkText(strObjectProperty))));
+					ele =driver.findElement(By.linkText(strObjectProperty));
 				} catch (TimeoutException t) {
 					System.out.println("Did not find the Element within explicit wait time");
 				}
@@ -122,40 +122,26 @@ public class ReusableFunctions extends BaseClass {
 
 			else if (strFindElementType.equalsIgnoreCase("TAG")) {
 				try {
-					ele = wait
-							.until(ExpectedConditions.visibilityOf(driver.findElement(By.tagName(strObjectProperty))));
+					ele = driver.findElement(By.tagName(strObjectProperty));
 				} catch (TimeoutException t) {
 					System.out.println("Did not find the Element within explicit wait time");
 				}
 				return ele;
 			} else if (strFindElementType.equalsIgnoreCase("CLASSNAME")) {
 				try {
-					ele = wait.until(
-							ExpectedConditions.visibilityOf(driver.findElement(By.className(strObjectProperty))));
+					ele = driver.findElement(By.className(strObjectProperty));
 				} catch (TimeoutException t) {
 					System.out.println("Did not find the Element within explicit wait time");
 				}
 				return ele;
 			} else if (strFindElementType.equalsIgnoreCase("PARTIALLINKTEXT")) {
 				try {
-					ele = wait.until(
-							ExpectedConditions.visibilityOf(driver.findElement(By.partialLinkText(strObjectProperty))));
+					ele = driver.findElement(By.partialLinkText(strObjectProperty));
 				} catch (TimeoutException t) {
 					System.out.println("Did not find the Element within explicit wait time");
 				}
 				return ele;
 			}
-
-			/*
-			 * else if (strFindElementType.equalsIgnoreCase("ACCESSIBILITYID")) { try { ele
-			 * = wait .until(ExpectedConditions.visibilityOf(driver.getAppiumDriver().
-			 * findElementByAccessibilityId(strObjectProperty))); } catch (TimeoutException
-			 * t) {
-			 * System.out.println("Did not find the Element within explicit wait time"); }
-			 * return ele;
-			 * 
-			 * }
-			 */
 
 		} catch (org.openqa.selenium.NoSuchElementException nsee) {
 			if (displayError) {
@@ -236,21 +222,13 @@ public class ReusableFunctions extends BaseClass {
 	 *                    entered in the text field.
 	 * @return void
 	 * @throws IOException
+	 * @throws InterruptedException 
 	 *********************************************************************
 	 */
 
 	@SuppressWarnings("rawtypes")
-	public boolean clearAndEnterText(WebElement elemToUpdate, String strValueToUpdate, String strObjName)
-			throws IOException {
-
-		// WebDriverWait wait = new WebDriverWait(driver, 20);
-		WebElement element = wait.until(ExpectedConditions.visibilityOf(elemToUpdate));
-		/*
-		 * if(driver.getCapabilities().getBrowserName().contains("IE")) { try {
-		 * scrollIntoView(element); } catch (InterruptedException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); } }
-		 */
-		if (!strValueToUpdate.trim().equalsIgnoreCase("IGNORE")) {
+	public boolean clearAndEnterText(WebElement element, String strValueToUpdate, String strObjName)
+			throws IOException, InterruptedException {
 			try {
 				if (element.isDisplayed() && element.isEnabled()) {
 					element.clear();
@@ -269,14 +247,17 @@ public class ReusableFunctions extends BaseClass {
 			} catch (org.openqa.selenium.NoSuchElementException nsee) {
 				Report.updateExtentStatus("UPDATE ANY ELEMENT : " + strObjName,
 						strObjName + " object does not exist in page", Status.FAIL);
+				String exception =ExceptionUtils.getFullStackTrace(nsee);
+				throw new TestExecutionException("No Such Element",exception);
 			} catch (Exception e) {
 				Report.updateExtentStatus("UPDATE ANY ELEMENT",
 						"Error in finding object - " + strObjName + ". Error Description - " + e.toString(),
 						Status.FAIL);
+				String exception =ExceptionUtils.getFullStackTrace(e);
+				throw new TestExecutionException("No Such Element",exception);
 			}
 			return false;
-		} else
-			return true;
+	
 	}
 
 	/**
@@ -349,7 +330,6 @@ public class ReusableFunctions extends BaseClass {
 	public boolean updateAnyElement(WebElement elemToUpdate, String strValueToUpdate, String strObjName)
 			throws IOException {
 
-		if (!strValueToUpdate.trim().equalsIgnoreCase("IGNORE")) {
 			try {
 				if (elemToUpdate.isDisplayed() && elemToUpdate.isEnabled()) {
 
@@ -377,14 +357,17 @@ public class ReusableFunctions extends BaseClass {
 			} catch (org.openqa.selenium.NoSuchElementException nsee) {
 				Report.updateExtentStatus("UPDATE ANY ELEMENT : " + strObjName,
 						strObjName + " object does not exist in page", Status.FAIL);
+				String exception =ExceptionUtils.getFullStackTrace(nsee);
+				throw new TestExecutionException("No Such Element",exception);
 			} catch (Exception e) {
 				Report.updateExtentStatus("Enter text in any ELEMENT",
 						"Error in finding object - " + strObjName + ". Error Description - " + e.toString(),
 						Status.FAIL);
+				String exception =ExceptionUtils.getFullStackTrace(e);
+				throw new TestExecutionException("No Such Element",exception);
 			}
 			return false;
-		} else
-			return true;
+
 	}
 
 	/**
@@ -400,39 +383,26 @@ public class ReusableFunctions extends BaseClass {
 	 * @throws IOException
 	 ************************************************************* 
 	 */
-	public void clickIfElementPresent(WebElement elementToSelect, String strValueToSelect, String strObjName)
+	public void clickIfElementPresent(WebElement element, String strValueToSelect, String strObjName)
 			throws IOException {
-
-		// WebDriverWait wait = new WebDriverWait(driver, 20);
-		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(elementToSelect));
-		/*
-		 * if(driver.getCapabilities().getBrowserName().contains("IE")) { try {
-		 * scrollIntoView(element); } catch (InterruptedException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); } }
-		 */
-		String strStateToReport = " ";
-		boolean blnValueToSelect = true;
-		if (!(strValueToSelect.trim().equalsIgnoreCase("IGNORE"))) {
-			if (strValueToSelect.trim().equalsIgnoreCase("N")) {
-				blnValueToSelect = false;
-				strStateToReport = " not ";
-			}
+		try {
 			if (element.isEnabled()) {
-				if (!blnValueToSelect && !element.isSelected()) {
-					if (blnValueToSelect && element.isSelected()) {
-						element.click();
-					}
-				}
 				element.click();
-				Report.updateExtentStatus("Select the element (" + strObjName + ")",
-						strObjName + " is" + strStateToReport + "checked as required", Status.DONE);
+				Report.updateExtentStatus("Click the element (" + strObjName + ")",
+						strObjName + " is successfully" + "clicked as required", Status.DONE);
 
 			} else {
 				Report.updateExtentStatus("Verify if the Element(" + strObjName + ") is present and selected",
 						strObjName + " object is not enabled", Status.FAIL);
 			}
+		}catch(Exception e) {
+			Report.updateExtentStatus("Verify if the Element(" + strObjName + ") is present and selected",
+					strObjName + " object is not present", Status.FAIL);
+			String exception =ExceptionUtils.getFullStackTrace(e);
+			throw new TestExecutionException("No Such Element",exception);
 		}
-	}
+		}
+	
 
 	/**
 	 *********************************************************************
@@ -568,11 +538,7 @@ public class ReusableFunctions extends BaseClass {
 
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, 30);
-			/*
-			 * if(driver.getCapabilities().getBrowserName().contains("IE")) { try {
-			 * scrollIntoView(element); } catch (InterruptedException e) { // TODO
-			 * Auto-generated catch block e.printStackTrace(); } }
-			 */
+
 			if (isElementPresentVerification(wait.ignoring(StaleElementReferenceException.class)
 					.until(ExpectedConditions.elementToBeClickable(element)), strObjName)) {
 				wait.ignoring(StaleElementReferenceException.class)
@@ -589,7 +555,9 @@ public class ReusableFunctions extends BaseClass {
 		} catch (Exception e) {
 			Report.updateExtentStatus("CLICK IF ELEMENT PRESENT",
 					"Error in method - Error Description - " + e.toString(), Status.FAIL);
-			return false;
+			String exception =ExceptionUtils.getFullStackTrace(e);
+			throw new TestExecutionException("No Such Element",exception);
+			
 		}
 	}
 
@@ -1131,31 +1099,18 @@ public class ReusableFunctions extends BaseClass {
 	 * @throws IOException
 	 ************************************************************* 
 	 */
-	public void selectAnyElement(WebElement elementToSelect, int indexToSelect, String strObjName) throws IOException {
-
-		// WebElement element =
-		// wait.until(ExpectedConditions.visibilityOf(elementToSelect));
-		WebElement element = elementToSelect;
-		/*
-		 * if(driver.getCapabilities().getBrowserName().contains("IE")) { try {
-		 * scrollIntoView(element); } catch (InterruptedException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); } }
-		 */
-		if (indexToSelect > -1) {
-			if (element.isEnabled()) {
-				// element.click();
-
-				Select comSelElement = new Select(element);
+	public void selectAnyElement(WebElement element, int indexToSelect, String strObjName) throws IOException {
+		try {
+			Select comSelElement = new Select(element);
 
 				comSelElement.selectByIndex(indexToSelect);
 
 				Report.updateExtentStatus("Verify if the Element(" + strObjName + ") is present and selected",
 						strObjName + " value : '" + indexToSelect + "' is selected", Status.DONE);
-			} else {
+			} catch(Exception e){
 				Report.updateExtentStatus("Verify if the Element(" + strObjName + ") is present and selected",
 						strObjName + " object is not enabled", Status.FAIL);
 			}
-		}
 	}
 
 	/**
@@ -1951,5 +1906,14 @@ public class ReusableFunctions extends BaseClass {
 	private String normalizeLineEnds(String s) {
 		System.out.println(s.replace("\r\n", " ").replace('\r', ' ').replace('\n', ' ').trim());
 	    return s.replace("\r\n", "\n").replace('\r', '\n').replace('\n', ' ').trim();
+	}
+	
+	public String returnCurrencyFormat(double currency) {
+		
+		return NumberFormat.getCurrencyInstance(Locale.US).format(currency);
+	}
+	public void scrollToTopOfPage() {
+		((JavascriptExecutor) driver)
+		.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 	}
 }

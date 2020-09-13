@@ -1,7 +1,8 @@
 /.metadata/
+/.settings/
 /**/logs
-/.Pdf_Reports/
-/.target/
-/.test-output/
-/.target/
-/.images/
+/Pdf_Reports/
+/target/
+/test-output/
+/target/
+/images/

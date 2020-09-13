@@ -4,12 +4,14 @@ import static com.automation.pageObjects.ObjectLocator.*;
 
 public enum ShoppingCartPageObjects implements PageObjects {
 	
-		//Home Page
-        title_shoppingCart("cart-title page-title",CLASSNAME,"Shopping Cart - Page title"),
-        shoppingCartProductQuantityValue("form-input quantity-input",CLASSNAME,"Shopping Cart - Selected Product Quantity"),
+		//Shopping Cart Page
+        title_shoppingCart("//h1[@class='cart-title page-title']",XPATH,"Shopping Cart - Page title"),
+        shoppingCartProductName("product-name",CLASSNAME,"Shopping Cart - Product Name"),
+        shoppingCartProductQuantityValue("//input[contains(@name,'qty')]",XPATH,"Shopping Cart - Selected Product Quantity"),
         shoppingCartSelectedProductTotal("//div[@class='cell cart-item-price']/span[2]",XPATH,"Shopping Cart - Selected Product total"),
         shoppingCartSubTotal("cartSubTotal",ID,"Shopping Cart Sub Total Value"),
-        shoppingCartGrandTotalValue("cart-total-item grand-total",CLASSNAME,"Shopping Cart - Grand Total Value"),
+        shoppingCartGrandTotalValue("//div[@class='cart-grand-total cart-totals-item']/span[2]",XPATH,"Shopping Cart - Grand Total Value"),
+        shoppingCart_ShippingCost("//div[@class='cart-totals-item']/span[2]",XPATH,"Shopping Cart - Shipping Cart"),
         btn_checkOut("//div[@data-tid='bolt-checkout-button']",XPATH,"Shopping Cart - Checkout Button"),
         
         //Checkout Pop up - Shipping
@@ -26,8 +28,16 @@ public enum ShoppingCartPageObjects implements PageObjects {
         shippingOption_standarDelivery("//label[contains(text(),'Standard')]",XPATH,"Shopping Cart - Checkout Pop UP - Shipping Type - Standar Delivery"),
         txtTitlesubtotal("//div[@title='Subtotal' and @data-tid='name']/span",XPATH,"Shopping Cart - Checkout Pop - SubTotal Title"),
         txtPriceDollarSubTotal("//div[@title='Subtotal' and @data-tid='name']/span/following::div[1]",XPATH,"Shopping Cart - Checkout Pop Up - Subtotal Price in $"),
-        
+        txtTaxdollar("//div[@title='Tax']/span/following::div[1]",XPATH,"Shopping Cart - Checkout Pop up - Tax value in $"),
+        txtTotalCostdollar("//div[@title='Total']/span/following::div[1]",XPATH,"Shopping Cart - Checkout Pop up - Total cost in $"),
 
+        // Checkout Pop up - Payment
+        txt_CardNumber("ccn",ID,"Shopping Cart Page - Checkout Pop up - Payment section - Card Number text box"),
+        txt_expiration("exp",ID,"Shopping Cart Page - Checkout Pop UP - Payment Section - Card Expiry text box"),
+        txt_cvv("cvv",ID,"Shopping Cart Page - Checkout Pop UP - Payment Section - CVV text box"),
+        txt_billingFirstName("billingFirstName",ID,"Shopping Cart Page - Checkout Pop Up - Payment Section - Billing First Name"),
+        txt_billingLastName("billingLastName",ID,"Shopping Cart Page - Checkout Pop Up - Payment Section - Billing Last Name"),
+        btn_pay("//button[@data-tid='checkout-button']",XPATH,"Shopping Cart Page - Checkout Pop UP - Payment Section - Button Pay"),
 	   ;
 		
 	String strProperty = "";

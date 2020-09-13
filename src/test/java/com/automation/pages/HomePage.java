@@ -70,8 +70,10 @@ public class HomePage extends BaseClass {
 
 	}
 
-	public void searchProduct() throws IOException {
-		String productName = dataTable.getData("General_Data", "Product_Name");
+	public void searchProduct() throws IOException, InterruptedException {
+		String productName = dataTable.getData("General_Data", "Search_Product");
+		System.out.println("Entered Product Name:"+productName);
+		reusableFunctions.clickIfElementPresent(getPageElement(HomePageObjects.closePopUp), HomePageObjects.closePopUp.getObjectname());
 		reusableFunctions.clearAndEnterText(getPageElement(HomePageObjects.txtBox_SearchProduct), productName,
 				HomePageObjects.txtBox_SearchProduct.getObjectname());
 		reusableFunctions.hitEnterKey(getPageElement(HomePageObjects.txtBox_SearchProduct),
@@ -83,6 +85,15 @@ public class HomePage extends BaseClass {
 		} else {
 			Report.updateExtentStatus("Verify User navigated to Product Search Listing Page",
 					"User is NOT navigated to Product Search Listing Page", Status.FAIL);
+		}
+	}
+	
+	public void navigateToMyAccountPage() {
+		try {
+			reusableFunctions.clickIfElementPresent(getPageElement(HomePageObjects.link_MyAccount), HomePageObjects.link_MyAccount.getObjectname());
+			reusableFunctions.clickIfElementPresent(getPageElement(HomePageObjects.closePopUp), HomePageObjects.closePopUp.getObjectname());
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 

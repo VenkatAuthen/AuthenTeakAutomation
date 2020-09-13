@@ -15,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.CapabilityType;
@@ -55,7 +56,12 @@ public class WebDriverFactory {
 			// Takes the system proxy settings automatically
 
 			System.setProperty("webdriver.chrome.driver", properties.getProperty("ChromeDriverPath"));
-			driver = new ChromeDriver();
+			ChromeOptions cOptions = new ChromeOptions();
+			cOptions.addArguments("--allow-running-insecure-content");
+			cOptions.addArguments("--ignore-certificate-errors");
+			cOptions.addArguments("--disable-web-security");
+			cOptions.addArguments("--enable-javascript");
+			driver = new ChromeDriver(cOptions);
 			driver.manage().timeouts().setScriptTimeout(3L, TimeUnit.SECONDS);
 			
 			break;
@@ -63,7 +69,9 @@ public class WebDriverFactory {
 		case FIREFOX:
 			// Takes the system proxy settings automatically
 			System.setProperty("webdriver.gecko.driver", properties.getProperty("GeckoDriverPath"));
-			driver = new FirefoxDriver();
+			FirefoxOptions options = new FirefoxOptions();
+			options.addPreference("javascript.enabled", true);
+			driver = new FirefoxDriver(options);
 			break;
 
 		case GHOST_DRIVER:
