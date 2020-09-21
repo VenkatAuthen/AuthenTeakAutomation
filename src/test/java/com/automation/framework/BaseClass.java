@@ -74,7 +74,10 @@ public class BaseClass {
 
 		case "API":
 			break;
-
+			
+		case "LinksValidation":
+			break;
+			
 		case "LOCAL":
 			WebDriver webDriver = WebDriverFactory.getWebDriver(Browser.browserValue(browser.replace("\"", "")));
 			driver = webDriver;

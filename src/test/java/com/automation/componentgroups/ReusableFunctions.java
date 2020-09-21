@@ -1914,6 +1914,6 @@ public class ReusableFunctions extends BaseClass {
 	}
 	public void scrollToTopOfPage() {
 		((JavascriptExecutor) driver)
-		.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		.executeScript("window.scrollTo(document.body.scrollHeight,0)");
 	}
 }

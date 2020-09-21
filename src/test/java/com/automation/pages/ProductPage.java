@@ -59,7 +59,7 @@ public class ProductPage extends BaseClass {
 		reusableFunctions.clickIfElementPresent(getPageElement(ProductPageObjects.cushion), ProductPageObjects.cushion.getObjectname());
 		reusableFunctions.clickIfElementPresent(getPageElement(ProductPageObjects.btn_saveAndBack), ProductPageObjects.btn_saveAndBack.getObjectname());
 		reusableFunctions.clearAndEnterText(getPageElement(ProductPageObjects.txtBox_productQuantity), quantity, ProductPageObjects.txtBox_productQuantity.getObjectname());
-		//reusableFunctions.scrollIntoView(getPageElement(ProductPageObjects.txtBox_productQuantity));
+		reusableFunctions.scrollIntoView(getPageElement(ProductPageObjects.lnkLearnMoreLoan));
 		reusableFunctions.clickIfElementPresent(getPageElement(ProductPageObjects.btn_addToCart), ProductPageObjects.btn_addToCart.getObjectname());
 		reusableFunctions.isElementPresentContainsText(getPageElement(ProductPageObjects.addedToCartTitle), ProductPageObjects.addedToCartTitle.getObjectname(), "Added to your Cart");
 		}catch(Exception e) {

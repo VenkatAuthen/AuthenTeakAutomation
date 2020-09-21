@@ -21,6 +21,7 @@ public enum ProductPageObjects implements PageObjects {
 		brandFilterSecondOption("//ul[@id='filterByBrand']/li[1]/label/input",XPATH,"Product Page - Cushion - Filter cushion - 2nd checkbox - Sunbrella Rain option "),
 		gradeFilterGradeA("//ul[@id='filterByGrade']/li[1]/label/input",XPATH,"Product Page - Cushion Selection Filter - Grade Checkbox"),
 		selectProtectionCoverDropDown("//label[@class='selectBox__label form-label']/select[1]",XPATH,"Product Page - Optional 	protective Cover"),
+		lnkLearnMoreLoan("//a[@class='affirm-modal-trigger']",XPATH,"Product Page - Learn More Link for Loan EMI"),
 		;
 		
 	String strProperty = "";

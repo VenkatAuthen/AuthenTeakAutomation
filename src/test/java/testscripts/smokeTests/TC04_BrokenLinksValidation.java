@@ -11,21 +11,15 @@ import org.testng.annotations.Test;
 import com.automation.framework.BaseClass;
 import com.automation.framework.Report;
 import com.automation.framework.Status;
-import com.automation.pages.HomePage;
-import com.automation.pages.ProductListingPage;
-import com.automation.pages.ProductPage;
-import com.automation.pages.ShoppingCartPage;
+import com.automation.pages.BrokenLinksValidation;
 import com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter;
 
 @Listeners(ExtentITestListenerClassAdapter.class)
-public class TC01_SimpleProductCheckout extends BaseClass {
+public class TC04_BrokenLinksValidation extends BaseClass {
 
-	HomePage homePage;
-	ProductListingPage productListingPage;
-	ProductPage productPage;
-	ShoppingCartPage shoppingCartPage;
+	BrokenLinksValidation brokenLinks;
 
-	public TC01_SimpleProductCheckout() {
+	public TC04_BrokenLinksValidation() {
 		super();
 	}
 
@@ -39,10 +33,8 @@ public class TC01_SimpleProductCheckout extends BaseClass {
 			@Optional("Website_Validations") String dataTableName) {
 		initializeWebDriver(executionMode, toolName, mobileExecutionPlatform, mobileOsVersion, deviceName, browser,
 				browserVersion, platform, platformVersion, dataTableName);
-		homePage = new HomePage(this.getClass().getSimpleName());
-		productListingPage = new ProductListingPage(this.getClass().getSimpleName());
-		productPage = new ProductPage(this.getClass().getSimpleName());
-		shoppingCartPage = new ShoppingCartPage(this.getClass().getSimpleName());
+		brokenLinks = new BrokenLinksValidation(this.getClass().getSimpleName());
+
 		report = new Report(this.getClass().getSimpleName());
 
 	}
@@ -50,18 +42,12 @@ public class TC01_SimpleProductCheckout extends BaseClass {
 	@Test
 	public void verifySimpleProductCheckout() throws Exception {
 		try {
-			homePage.invokeApplication();
-			homePage.searchProduct();
-			productListingPage.clickOnFirstProduct();
-			productPage.customizeSimpleProductAndAddToCart();
-			productPage.validateSelectionsMiniCartAndViewCart();
-			shoppingCartPage.verifyShoppingCartPage();
-			shoppingCartPage.enterCustomerDetails();
-			shoppingCartPage.chooseStandarShipping();
-			shoppingCartPage.validateOrderSummary();
-			shoppingCartPage.enterPaymentDetails();
+			brokenLinks.invokeApplication();
+			brokenLinks.verifyBrokenLinks();
+			brokenLinks.checkAllInputLinks();
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			Assert.fail();
 			Report.updateExtentStatus("", "Test case failed due to the exception:"+e.getMessage(), Status.FAIL);
 		}

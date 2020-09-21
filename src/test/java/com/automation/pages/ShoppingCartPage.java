@@ -63,7 +63,7 @@ public class ShoppingCartPage extends BaseClass {
 		double grandTotal = Double.parseDouble(StringUtils.substring(totalcost, 1))+Double.parseDouble(StringUtils.substring(shippingCost, 1));
 		dataTable.putData("General_Data", "Grand_Total", reusableFunctions.returnCurrencyFormat(grandTotal));
 		reusableFunctions.isElementPresentContainsText(getPageElement(ShoppingCartPageObjects.shoppingCartGrandTotalValue), ShoppingCartPageObjects.shoppingCartGrandTotalValue.getObjectname(), reusableFunctions.returnCurrencyFormat(grandTotal));
-		reusableFunctions.scrollToTopOfPage();
+		//reusableFunctions.scrollToTopOfPage();
 		reusableFunctions.clickIfElementPresent(getPageElement(ShoppingCartPageObjects.btn_checkOut), ShoppingCartPageObjects.btn_checkOut.getObjectname());
 	}catch(Exception e) {
 		e.printStackTrace();
