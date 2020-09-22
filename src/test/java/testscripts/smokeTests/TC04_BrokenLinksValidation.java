@@ -40,7 +40,7 @@ public class TC04_BrokenLinksValidation extends BaseClass {
 	}
 
 	@Test
-	public void verifySimpleProductCheckout() throws Exception {
+	public void verifyifBrokenLinksExists() throws Exception {
 		try {
 			brokenLinks.invokeApplication();
 			brokenLinks.verifyBrokenLinks();

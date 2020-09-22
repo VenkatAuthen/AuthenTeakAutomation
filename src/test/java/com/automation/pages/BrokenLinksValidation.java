@@ -158,8 +158,6 @@ public class BrokenLinksValidation extends BaseClass {
 			workbook.write(fileOut);
 			workbook.close();
 			fileOut.close();
-
-			driver.quit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Exception - " + e);
@@ -238,17 +236,19 @@ public class BrokenLinksValidation extends BaseClass {
 
 			if (httpsURLConnect.getResponseCode() == 200) {
 				System.out.println(linkUrl + " - " + httpsURLConnect.getResponseMessage());
+				Report.updateExtentStatus(linkUrl,linkUrl+ ":Response Code : " + httpsURLConnect.getResponseCode()
+				+ "; Response Message : " + httpsURLConnect.getResponseMessage(), Status.PASS);
 			} else if ((httpsURLConnect.getResponseCode() == HttpsURLConnection.HTTP_NOT_FOUND)
 					|| (httpsURLConnect.getResponseCode() == 404)) {
 				System.out.println(linkUrl + " - " + httpsURLConnect.getResponseMessage() + " - "
 						+ HttpURLConnection.HTTP_NOT_FOUND);
-				Report.updateExtentStatus(linkUrl, "Response Code : " + httpsURLConnect.getResponseCode()
+				Report.updateExtentStatus(linkUrl,linkUrl+ ":Response Code : " + httpsURLConnect.getResponseCode()
 						+ "; Response Message : " + httpsURLConnect.getResponseMessage(), Status.FAIL);
 			} else if ((httpsURLConnect.getResponseCode() == HttpsURLConnection.HTTP_NOT_FOUND)
 					|| (httpsURLConnect.getResponseCode() == 503)) {
 				System.out.println(linkUrl + " - " + httpsURLConnect.getResponseMessage() + " - "
 						+ HttpURLConnection.HTTP_NOT_FOUND);
-				Report.updateExtentStatus(linkUrl, "Response Code : " + httpsURLConnect.getResponseCode()
+				Report.updateExtentStatus(linkUrl,linkUrl+ ":Response Code : " + httpsURLConnect.getResponseCode()
 						+ "; Response Message : " + httpsURLConnect.getResponseMessage(), Status.FAIL);
 			}
 
@@ -319,7 +319,7 @@ public class BrokenLinksValidation extends BaseClass {
 			System.out.println("Total links are " + rowCount);
 			System.out.println("--------------------------------------------------------------------");
 			Report.updateExtentStatus("", "Total links validated - " + rowCount, Status.DONE);
-
+			driver.get(dataTable.getData("General_Data", "URL"));
 			for (int i = 1; i < rowCount + 1; i++) {
 
 				// Get first row data from the input excel
@@ -333,20 +333,7 @@ public class BrokenLinksValidation extends BaseClass {
 
 					String url = row.getCell(1).getStringCellValue();
 					if (url != null) {
-
-						try {
-							driver.get(url);
-						} catch (Exception e) {
-							// TODO: handle exception
-						}
-						if (driver.getPageSource().contains("Fatal error")) {
-							System.out.println(url + " - Page contains Fatal error.");
-							Report.updateExtentStatus(url, url + ":Page contains Fatal error.", Status.FAIL);
-							excelRow.createCell(0).setCellValue(i);
-							excelRow.createCell(1).setCellValue(url);
-							excelRow.createCell(2).setCellValue("Fatal error");
-							excelRow.createCell(3).setCellValue("Page contains Fatal error.");
-						} else if (url.contains("https:")) {
+						if (url.contains("https:")) {
 							excelRow.createCell(0).setCellValue(i);
 							verifyLinkActivehttps(url, excelRow);
 						} else if (url.contains("http:")) {
@@ -377,7 +364,6 @@ public class BrokenLinksValidation extends BaseClass {
 			workbook.close();
 			fileOut.close();
 
-			driver.quit();
 		} catch (Exception e) {
 			System.out.println("Exception - " + e);
 		}
