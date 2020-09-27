@@ -107,5 +107,93 @@ public class MyAccountPage extends BaseClass {
 			e.printStackTrace();
 		}
 	}
+	
+	public void loginToAccount() {
+		try {
+			String userName = dataTable.getData("General_Data", "UserName");
+			String password = dataTable.getData("General_Data", "Password");
+			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxLoginUsernameEmail),userName, MyAccountPageObjects.txtBoxLoginUsernameEmail.getObjectname());
+			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxLoginPassword),password, MyAccountPageObjects.txtBoxLoginPassword.getObjectname());
+			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.btnLogin), MyAccountPageObjects.btnLogin.getObjectname());
+			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.headingOrders), MyAccountPageObjects.headingOrders.getObjectname());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyOrdersInYourAccount() {
+		try {
+			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.headingOrders), MyAccountPageObjects.headingOrders.getObjectname());
+			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.ordersblock), MyAccountPageObjects.ordersblock.getObjectname());
+			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.orderNumber), MyAccountPageObjects.orderNumber.getObjectname());
+			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.noOfItems), MyAccountPageObjects.noOfItems.getObjectname());
+			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.txtPlaced), MyAccountPageObjects.txtPlaced.getObjectname());
+			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.txtOrderDate), MyAccountPageObjects.txtOrderDate.getObjectname());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void enterNewAddress() {
+		try {
+			String firstName = dataTable.getData("General_Data", "FirstName");
+			String lastName = dataTable.getData("General_Data", "LastName");
+			String addr = dataTable.getData("General_Data", "Address");
+			String city = dataTable.getData("General_Data", "City");
+			String state = dataTable.getData("General_Data", "State");
+			String zip = dataTable.getData("General_Data", "Zip");
+			String phone = dataTable.getData("General_Data", "Phone");
+			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkNavAdresess), MyAccountPageObjects.lnkNavAdresess.getObjectname());			
+			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkNewAddress), MyAccountPageObjects.lnkNewAddress.getObjectname());
+			reusableFunctions.verifyIfElementPresent(getPageElement(MyAccountPageObjects.txtNewAddressHeading), MyAccountPageObjects.txtNewAddressHeading.getObjectname());
+			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxNewAddressFirstName),firstName, MyAccountPageObjects.txtBoxNewAddressFirstName.getObjectname());
+			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxNewAddressLastName),lastName, MyAccountPageObjects.txtBoxNewAddressLastName.getObjectname());
+			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxNewAddressAddressline1),addr, MyAccountPageObjects.txtBoxNewAddressAddressline1.getObjectname());
+			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxNewAddressCity),city, MyAccountPageObjects.txtBoxNewAddressCity.getObjectname());
+			reusableFunctions.selectAnyElementByValue(getPageElement(MyAccountPageObjects.drpDownNewAddressState),state, MyAccountPageObjects.drpDownNewAddressState.getObjectname());
+			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxNewAddressZip),zip, MyAccountPageObjects.txtBoxNewAddressZip.getObjectname());
+			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxNewAddressPhoneNumber),phone, MyAccountPageObjects.txtBoxNewAddressPhoneNumber.getObjectname());
+			reusableFunctions.scrollIntoView(getPageElement(MyAccountPageObjects.txtBoxNewAddressAddressline1));
+			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.btnSaveAddress), MyAccountPageObjects.btnSaveAddress.getObjectname());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteAddress() {
+		try {
+			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.btnAddressDelete), MyAccountPageObjects.btnAddressDelete.getObjectname());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
+	public void validateAccountSettings() {
+		try {
+			String phone = dataTable.getData("General_Data", "Phone");
+			String email = dataTable.getData("General_Data", "Email");
+			String password = dataTable.getData("General_Data", "Password");
+			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkNavAccountSettings), MyAccountPageObjects.lnkNavAccountSettings.getObjectname());
+			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxAccountSettingsPhoneNumber),phone, MyAccountPageObjects.txtBoxAccountSettingsPhoneNumber.getObjectname());
+			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxAccountSettingsEmail),email, MyAccountPageObjects.txtBoxAccountSettingsEmail.getObjectname());
+			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxAccountSettingsPassword),password, MyAccountPageObjects.txtBoxAccountSettingsPassword.getObjectname());
+			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxAccountSettingConfirmPassword),password, MyAccountPageObjects.txtBoxAccountSettingConfirmPassword.getObjectname());
+			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxAccountSettingCurrentPassword),password, MyAccountPageObjects.txtBoxAccountSettingCurrentPassword.getObjectname());
+			reusableFunctions.scrollIntoView(getPageElement(MyAccountPageObjects.txtBoxAccountSettingsPassword));
+			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.btnUpdateDetails), MyAccountPageObjects.btnUpdateDetails.getObjectname());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void validateRecentlyViewed() {
+		try {
+			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkNavRecentlyViewed), MyAccountPageObjects.lnkNavRecentlyViewed.getObjectname());
+			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.lnkNavRecentlyViewed), MyAccountPageObjects.lnkNavRecentlyViewed.getObjectname());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

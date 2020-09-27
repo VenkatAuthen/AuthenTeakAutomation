@@ -540,7 +540,7 @@ public class ReusableFunctions extends BaseClass {
 			WebDriverWait wait = new WebDriverWait(driver, 30);
 
 			if (isElementPresentVerification(wait.ignoring(StaleElementReferenceException.class)
-					.until(ExpectedConditions.elementToBeClickable(element)), strObjName)) {
+					.until(ExpectedConditions.visibilityOf(element)), strObjName)) {
 				wait.ignoring(StaleElementReferenceException.class)
 						.until(ExpectedConditions.elementToBeClickable(element)).click();
 				// Thread.sleep(1000);

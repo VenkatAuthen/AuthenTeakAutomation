@@ -9,6 +9,7 @@ import com.automation.framework.BaseClass;
 import com.automation.framework.Report;
 import com.automation.framework.Status;
 import com.automation.pageObjects.HomePageObjects;
+import com.automation.pageObjects.MyAccountPageObjects;
 import com.automation.pageObjects.ProductListingPageObjects;
 
 public class HomePage extends BaseClass {
@@ -41,7 +42,7 @@ public class HomePage extends BaseClass {
 				System.out.println("Element Not Found: " + pageEnum.getObjectname());
 			return element;
 		} catch (Exception e) {
-			Report.updateExtentStatus("Registration Page - get page element",
+			Report.updateExtentStatus("Home Page - get page element",
 					pageEnum.toString() + " object is not defined or found.", Status.FAIL);
 			return null;
 		}
@@ -58,12 +59,28 @@ public class HomePage extends BaseClass {
 				System.out.println("Element Not Found: " + pageEnum.getObjectname());
 			return element;
 		} catch (Exception e) {
-			Report.updateExtentStatus("Registration Page - get page element",
+			Report.updateExtentStatus("Product Listing Page- get page element",
 					pageEnum.toString() + " object is not defined or found.", Status.FAIL);
 			return null;
 		}
 	}
 
+	private WebElement getPageElement(MyAccountPageObjects pageEnum) throws IOException {
+		WebElement element;
+		try {
+			element = reusableFunctions.getElementByProperty(pageEnum.getProperty(),
+					pageEnum.getLocatorType().toString(), true);
+			if (element != null)
+				System.out.println("Found the element: " + pageEnum.getObjectname());
+			else
+				System.out.println("Element Not Found: " + pageEnum.getObjectname());
+			return element;
+		} catch (Exception e) {
+			Report.updateExtentStatus("My Account Page - get page element",
+					pageEnum.toString() + " object is not defined or found.", Status.FAIL);
+			return null;
+		}
+	}
 	public void invokeApplication() {
 		String WebsiteURL = dataTable.getData("General_Data", "URL");
 		driver.get(WebsiteURL);
@@ -91,10 +108,12 @@ public class HomePage extends BaseClass {
 	public void navigateToMyAccountPage() {
 		try {
 			reusableFunctions.clickIfElementPresent(getPageElement(HomePageObjects.link_MyAccount), HomePageObjects.link_MyAccount.getObjectname());
-			reusableFunctions.clickIfElementPresent(getPageElement(HomePageObjects.closePopUp), HomePageObjects.closePopUp.getObjectname());
+			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.popUp), MyAccountPageObjects.popUp.getObjectname());
+		
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	
 }

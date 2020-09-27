@@ -6,6 +6,7 @@ public enum MyAccountPageObjects implements PageObjects {
 	
 		//My Account Page
         btnCreateAccount("//a[@class='button account-button-primary']",XPATH,"My Account Page - Create Account Button"),
+        popUp("//button[@alt='Close form']",XPATH,"My Account Page - Close pop up"),
         
         //Create Account
         txtBoxemail("input-FormField_1",ID,"My Account - Create Account Page - Email Text Field"),
@@ -29,6 +30,58 @@ public enum MyAccountPageObjects implements PageObjects {
         titleAccountCreated("//div[@class='h1 account-heading']",XPATH,"My Account - Account Created Title"),
         descAccountCreated("//div[@class='account-content']/p",XPATH,"My Account - Account Created with email address"),
         btnContinue("//a[@class='button account-button-primary']",XPATH,"My Account - Account Created Page - Continue Button"),
+        
+        //Login Page
+        txtBoxLoginUsernameEmail("input-login_email",ID,"Login Page - Username - Email Text Box"),
+        txtBoxLoginPassword("password-login_pass",ID,"Login Page - Password Text Box "),
+        btnLogin("//input[@value='Log In']",XPATH,"Login Page - Login Button"),
+       
+        // Your Account page
+        lnkNavOrders("//ul[@class='account-nav-list']/li[1]/a",XPATH,"Your Account Page - Nav Link - Orders"),
+        headingOrders("//div[@class='h1 account-heading']",XPATH,"Your Account Page - Heading - Orders"),
+        ordersblock("//div[@class='account-items']",XPATH,"Your Account Page - Orders Block"),
+        orderNumber("//h1[@class='account-item-title']/a",XPATH,"Your Account Page - Order Number"),
+        noOfItems("//p[@class='account-item-description']",XPATH,"Your Account Page - Number of Items"),
+        txtPlaced("//h2[@class='account-item-detail-title']",XPATH,"Your Account Page - Text - Placed On"),
+        txtOrderDate("//span[@class='account-item-detail-value']",XPATH,"Your Account Page - Text - Order Date"),
+        
+        orderStatus("//h2[@class='account-status']",XPATH,"Your Account Page - Order Status"),
+        lnkViewStatusDetails("//div[@class='account-item-badge']/p/a",XPATH,"Your Account Page - Order - View Status Details"),
+        
+        lnkNavAdresess("//ul[@class='account-nav-list']/li[3]/a",XPATH,"Your Account Page - Nav Link - Addresses"),
+        lnkNavRecentlyViewed("//ul[@class='account-nav-list']/li[4]/a",XPATH,"Your Account Page - Nav Link - Recently Viewed"),
+        lnkNavAccountSettings("//ul[@class='account-nav-list']/li[5]/a",XPATH,"Your Account Page - Nav Link - Account Settings"),
+        
+        //Address
+        btnAddressEdit("//div[@class='account-item-actions']/form/a",XPATH,"Your Account - Addresses - Edit Button"),
+        btnAddressDelete("//div[@class='account-item-actions']/form/button",XPATH,"Your Account Addresses - Delete Button"),
+        txtAddressNameHeading("//h1[@class='account-item-title account-item-title-large']",XPATH,"Your Account Addresses - Name in Address field"),
+        txtAddress("//div[@class='account-item-details']",XPATH,"Your Account - Address section - Address"),
+        lnkNewAddress("//div[@class='account-toolbar']/a",XPATH,"Your Account - Address Seciton - New Address Link"),
+        
+        //New Address
+        txtNewAddressHeading("//div[@class='h1 account-heading']",XPATH,"Your Account - New Address Heading"),
+        txtBoxNewAddressFirstName("input-FormField_4",ID,"Your Account - New Adresses - First Name Text Box"),
+        txtBoxNewAddressLastName("input-FormField_5",ID,"Your Account - New Adresses Last Name Text Box "),
+        txtBoxNewAddressAddressline1("input-FormField_8",ID,"Your Account - New Addresses - Address Line 1"),
+        txtBoxNewAddressCity("input-FormField_10",ID,"Your Account - New Addresses - City Text Box"),
+        drpDownNewAddressState("select-FormField_12",ID,"Your Account - New Addresses - State Drop Down"),
+        txtBoxNewAddressZip("input-FormField_13",ID,"Your Account - New Addresses - Zip Text Box"),
+        txtBoxNewAddressPhoneNumber("input-FormField_7",ID,"Your Account - New Addresses - Phone Number Text Box"),
+        
+        btnSaveAddress("//input[@value ='Save Address']",XPATH,"Your Account - New Address - Save Address Button"),
+        
+        // Recently View
+        imgRecentlyViewedItem("//figure",XPATH,"Your Account - Recently Viewed - Item"),
+        
+        //Account Settings
+        txtBoxAccountSettingsPhoneNumber("//input[@name='account_phone']",XPATH,"Your Account - Account Settings - Phone Number Text Box"),
+        txtBoxAccountSettingsEmail("input-FormField_1",ID,"Your Account - Account Settings - Email Text Box"),
+        txtBoxAccountSettingsPassword("password-FormField_2",ID,"Your Account - Account Settings - Password text box"),
+        txtBoxAccountSettingConfirmPassword("password-FormField_3",ID,"Your Account - Account Settings - Confirm Password text box"),
+        txtBoxAccountSettingCurrentPassword("password-FormField_24",ID,"Your Account - Account Settings - Current Password text box"),
+        btnUpdateDetails("//button[@class='button account-button-primary']",XPATH,"Your Account - Account Settings - Update Details Button"),
+        
         
         ;
 		

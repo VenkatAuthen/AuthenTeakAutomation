@@ -63,7 +63,8 @@ public class WebDriverFactory {
 			cOptions.addArguments("--enable-javascript");
 			driver = new ChromeDriver(cOptions);
 			driver.manage().timeouts().setScriptTimeout(3L, TimeUnit.SECONDS);
-			
+			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			break;
 
 		case FIREFOX:
@@ -280,7 +281,7 @@ public class WebDriverFactory {
 
 		properties = Settings.getInstance();
 		System.setProperty("webdriver.chrome.driver", properties.getProperty("ChromeDriverPath"));
-
+		
 		return new ChromeDriver(desiredCapabilities);
 	}
 
