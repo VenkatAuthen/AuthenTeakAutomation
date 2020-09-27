@@ -49,9 +49,10 @@ public class TC05_ValidateAccountPage extends BaseClass {
 			homePage.navigateToMyAccountPage();
 			myAccountPage.loginToAccount();
 			myAccountPage.verifyOrdersInYourAccount();
+			myAccountPage.validateRecentlyViewed();
 			myAccountPage.enterNewAddress();
 			myAccountPage.deleteAddress();
-			myAccountPage.validateRecentlyViewed();
+			
 			myAccountPage.validateAccountSettings();
 			
 		} catch (Exception e) {
