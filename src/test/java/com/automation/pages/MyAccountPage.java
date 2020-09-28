@@ -98,7 +98,7 @@ public class MyAccountPage extends BaseClass {
 			reusableFunctions.selectAnyElementByValue(getPageElement(MyAccountPageObjects.selectDrpDownState), state, MyAccountPageObjects.selectDrpDownState.getObjectname());
 			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxZipCode), zip, MyAccountPageObjects.txtBoxZipCode.getObjectname());
 			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxPhoneNumber), phone, MyAccountPageObjects.txtBoxPhoneNumber.getObjectname());
-			
+			reusableFunctions.scrollIntoView(getPageElement(MyAccountPageObjects.txtBoxFirstName));
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.btnCreateNewAccount), MyAccountPageObjects.btnCreateNewAccount.getObjectname());
 			
 			reusableFunctions.isElementPresentContainsText(getPageElement(MyAccountPageObjects.titleAccountCreated), MyAccountPageObjects.titleAccountCreated.getObjectname(), "Account Created");
