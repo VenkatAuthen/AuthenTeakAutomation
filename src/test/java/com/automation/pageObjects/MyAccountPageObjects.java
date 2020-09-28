@@ -7,7 +7,8 @@ public enum MyAccountPageObjects implements PageObjects {
 		//My Account Page
         btnCreateAccount("//a[@class='button account-button-primary']",XPATH,"My Account Page - Create Account Button"),
         popUp("//button[@alt='Close form']",XPATH,"My Account Page - Close pop up"),
-        
+        lnkLogOut("//a[@class='top-bar-button']",XPATH,"My Account Page - Logout Link"),
+        msgLogoutSuccessful("//div[@class='alert-message']",XPATH,"My Account Page - Logout Successful message"),
         //Create Account
         txtBoxemail("input-FormField_1",ID,"My Account - Create Account Page - Email Text Field"),
         txtBoxPassword("password-FormField_2",ID,"My Account - Create Account Page - Password Text Field"),
@@ -57,7 +58,7 @@ public enum MyAccountPageObjects implements PageObjects {
         btnAddressDelete("//div[@class='account-item-actions']/form/button",XPATH,"Your Account Addresses - Delete Button"),
         txtAddressNameHeading("//h1[@class='account-item-title account-item-title-large']",XPATH,"Your Account Addresses - Name in Address field"),
         txtAddress("//div[@class='account-item-details']",XPATH,"Your Account - Address section - Address"),
-        lnkNewAddress("//div[@class='account-toolbar']/a",XPATH,"Your Account - Address Seciton - New Address Link"),
+        lnkNewAddress("//a[@class='account-tool']",XPATH,"Your Account - Address Seciton - New Address Link"),
         
         //New Address
         txtNewAddressHeading("//div[@class='h1 account-heading']",XPATH,"Your Account - New Address Heading"),
@@ -75,13 +76,14 @@ public enum MyAccountPageObjects implements PageObjects {
         imgRecentlyViewedItem("//figure",XPATH,"Your Account - Recently Viewed - Item"),
         
         //Account Settings
+        titleAccountSettings("//div[@class='h1 account-heading']",XPATH,"My Account Page - Account Settings page Heading"),
         txtBoxAccountSettingsPhoneNumber("//input[@name='account_phone']",XPATH,"Your Account - Account Settings - Phone Number Text Box"),
         txtBoxAccountSettingsEmail("input-FormField_1",ID,"Your Account - Account Settings - Email Text Box"),
         txtBoxAccountSettingsPassword("password-FormField_2",ID,"Your Account - Account Settings - Password text box"),
         txtBoxAccountSettingConfirmPassword("password-FormField_3",ID,"Your Account - Account Settings - Confirm Password text box"),
         txtBoxAccountSettingCurrentPassword("password-FormField_24",ID,"Your Account - Account Settings - Current Password text box"),
         btnUpdateDetails("//button[@class='button account-button-primary']",XPATH,"Your Account - Account Settings - Update Details Button"),
-        
+        msgAccountDetailsUpdated("//div[@class='alert-message']",XPATH,"Your Account - Message - Account Details Updated"),
         
         ;
 		

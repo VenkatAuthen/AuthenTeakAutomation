@@ -43,7 +43,7 @@ public class TC05_ValidateAccountPage extends BaseClass {
 	}
 
 	@Test
-	public void verifySimpleProductCheckout() throws Exception {
+	public void validateAccountPage() throws Exception {
 		try {
 			homePage.invokeApplication();
 			homePage.navigateToMyAccountPage();
@@ -52,8 +52,8 @@ public class TC05_ValidateAccountPage extends BaseClass {
 			myAccountPage.validateRecentlyViewed();
 			myAccountPage.enterNewAddress();
 			myAccountPage.deleteAddress();
-			
 			myAccountPage.validateAccountSettings();
+			myAccountPage.logOut();
 			
 		} catch (Exception e) {
 			Assert.fail();

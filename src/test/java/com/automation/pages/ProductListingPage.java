@@ -1,6 +1,8 @@
 package com.automation.pages;
 
 import java.io.IOException;
+
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
@@ -8,6 +10,7 @@ import com.automation.componentgroups.*;
 import com.automation.framework.BaseClass;
 import com.automation.framework.Report;
 import com.automation.framework.Status;
+import com.automation.framework.TestExecutionException;
 import com.automation.pageObjects.ProductListingPageObjects;
 import com.automation.pageObjects.ProductPageObjects;
 
@@ -67,6 +70,7 @@ public class ProductListingPage extends BaseClass {
 	}
 
 	public void clickOnFirstProduct() throws IOException {
+		try {
 		reusableFunctions.clickIfElementPresent(getPageElement(ProductListingPageObjects.firstProduct), ProductListingPageObjects.firstProduct.getObjectname());
 		if (reusableFunctions.verifyIfElementIsPresent(getPageElement(ProductPageObjects.title_customizeProduct),
 				ProductPageObjects.title_customizeProduct.getObjectname())) {
@@ -75,6 +79,11 @@ public class ProductListingPage extends BaseClass {
 		} else {
 			Report.updateExtentStatus("Verify User navigated to Product Page",
 					"User is NOT navigated to Product Page", Status.FAIL);
+			
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 	}
 

@@ -1,6 +1,8 @@
 package com.automation.pages;
 
 import java.io.IOException;
+
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -8,6 +10,7 @@ import com.automation.componentgroups.*;
 import com.automation.framework.BaseClass;
 import com.automation.framework.Report;
 import com.automation.framework.Status;
+import com.automation.framework.TestExecutionException;
 import com.automation.pageObjects.ProductPageObjects;
 
 public class ProductPage extends BaseClass {
@@ -64,6 +67,7 @@ public class ProductPage extends BaseClass {
 		reusableFunctions.isElementPresentContainsText(getPageElement(ProductPageObjects.addedToCartTitle), ProductPageObjects.addedToCartTitle.getObjectname(), "Added to your Cart");
 		}catch(Exception e) {
 			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 		}
 
@@ -81,6 +85,7 @@ public class ProductPage extends BaseClass {
 			reusableFunctions.clickIfElementPresent(getPageElement(ProductPageObjects.btn_viewCart), ProductPageObjects.btn_viewCart.getObjectname());
 		}catch(Exception e) {
 			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 			}
 	}
 	
@@ -108,12 +113,13 @@ public class ProductPage extends BaseClass {
 			}
 			dataTable.putData("General_Data","Product_Cost",updatedProductCost);
 			reusableFunctions.clearAndEnterText(getPageElement(ProductPageObjects.txtBox_productQuantity), quantity, ProductPageObjects.txtBox_productQuantity.getObjectname());
-			//reusableFunctions.scrollIntoView(getPageElement(ProductPageObjects.txtBox_productQuantity));
+			reusableFunctions.scrollIntoView(getPageElement(ProductPageObjects.btn_selectCushion));
 			reusableFunctions.clickIfElementPresent(getPageElement(ProductPageObjects.btn_addToCart), ProductPageObjects.btn_addToCart.getObjectname());
 			reusableFunctions.isElementPresentContainsText(getPageElement(ProductPageObjects.addedToCartTitle), ProductPageObjects.addedToCartTitle.getObjectname(), "Added to your Cart");
 		
 		}catch(Exception e) {
 			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 	}
 	

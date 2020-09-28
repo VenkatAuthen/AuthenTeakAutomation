@@ -1,6 +1,8 @@
 package com.automation.pages;
 
 import java.io.IOException;
+
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -9,6 +11,7 @@ import com.automation.componentgroups.*;
 import com.automation.framework.BaseClass;
 import com.automation.framework.Report;
 import com.automation.framework.Status;
+import com.automation.framework.TestExecutionException;
 import com.automation.pageObjects.ShoppingCartPageObjects;
 
 public class ShoppingCartPage extends BaseClass {
@@ -67,6 +70,7 @@ public class ShoppingCartPage extends BaseClass {
 		reusableFunctions.clickIfElementPresent(getPageElement(ShoppingCartPageObjects.btn_checkOut), ShoppingCartPageObjects.btn_checkOut.getObjectname());
 	}catch(Exception e) {
 		e.printStackTrace();
+		throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 	}
 	}
 	
@@ -88,6 +92,7 @@ public class ShoppingCartPage extends BaseClass {
 		reusableFunctions.clickIfElementPresent(getPageElement(ShoppingCartPageObjects.btn_continue), ShoppingCartPageObjects.btn_continue.getObjectname());
 		}catch(Exception e) {
 			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 	}
 	
@@ -96,6 +101,7 @@ public class ShoppingCartPage extends BaseClass {
 		reusableFunctions.clickIfElementPresent(getPageElement(ShoppingCartPageObjects.shippingOption_standarDelivery), ShoppingCartPageObjects.shippingOption_standarDelivery.getObjectname());
 		}catch(Exception e) {
 			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 		}
 	
@@ -109,6 +115,7 @@ public class ShoppingCartPage extends BaseClass {
 		reusableFunctions.clickIfElementPresent(getPageElement(ShoppingCartPageObjects.btn_continue), ShoppingCartPageObjects.btn_continue.getObjectname());
 		}catch(Exception e) {
 			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 	}
 	
@@ -128,7 +135,8 @@ public class ShoppingCartPage extends BaseClass {
 		reusableFunctions.verifyIfElementIsPresent(getPageElement(ShoppingCartPageObjects.btn_pay), ShoppingCartPageObjects.btn_pay.getObjectname());
 		driver.switchTo().parentFrame();
 		}catch(Exception e) {
-			
+			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 	}
 }

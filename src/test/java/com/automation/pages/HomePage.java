@@ -1,6 +1,8 @@
 package com.automation.pages;
 
 import java.io.IOException;
+
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
@@ -8,6 +10,7 @@ import com.automation.componentgroups.*;
 import com.automation.framework.BaseClass;
 import com.automation.framework.Report;
 import com.automation.framework.Status;
+import com.automation.framework.TestExecutionException;
 import com.automation.pageObjects.HomePageObjects;
 import com.automation.pageObjects.MyAccountPageObjects;
 import com.automation.pageObjects.ProductListingPageObjects;
@@ -81,13 +84,19 @@ public class HomePage extends BaseClass {
 			return null;
 		}
 	}
-	public void invokeApplication() {
+	public void invokeApplication() throws IOException {
+		try {
 		String WebsiteURL = dataTable.getData("General_Data", "URL");
 		driver.get(WebsiteURL);
-
+		}catch(Exception e) {
+			Report.updateExtentStatus("",
+					"Exception : Not able to Invoke Application:"+ ExceptionUtils.getFullStackTrace(e), Status.FAIL);
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
+		}
 	}
 
 	public void searchProduct() throws IOException, InterruptedException {
+		try {
 		String productName = dataTable.getData("General_Data", "Search_Product");
 		System.out.println("Entered Product Name:"+productName);
 		reusableFunctions.clickIfElementPresent(getPageElement(HomePageObjects.closePopUp), HomePageObjects.closePopUp.getObjectname());
@@ -103,15 +112,23 @@ public class HomePage extends BaseClass {
 			Report.updateExtentStatus("Verify User navigated to Product Search Listing Page",
 					"User is NOT navigated to Product Search Listing Page", Status.FAIL);
 		}
+		}catch(Exception e) {
+			Report.updateExtentStatus("Verify User navigated to Product Search Listing Page",
+					"Exception : User is NOT navigated to Product Search Listing Page:"+ ExceptionUtils.getFullStackTrace(e), Status.FAIL);
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
+		}
 	}
 	
-	public void navigateToMyAccountPage() {
+	public void navigateToMyAccountPage() throws IOException {
 		try {
 			reusableFunctions.clickIfElementPresent(getPageElement(HomePageObjects.link_MyAccount), HomePageObjects.link_MyAccount.getObjectname());
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.popUp), MyAccountPageObjects.popUp.getObjectname());
 		
 		}catch(Exception e) {
 			e.printStackTrace();
+			Report.updateExtentStatus("",
+					"Exception : Not able to Navigate to My Account Page:"+ ExceptionUtils.getFullStackTrace(e), Status.FAIL);
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 	}
 

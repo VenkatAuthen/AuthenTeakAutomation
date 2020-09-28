@@ -229,8 +229,9 @@ public class ReusableFunctions extends BaseClass {
 	@SuppressWarnings("rawtypes")
 	public boolean clearAndEnterText(WebElement element, String strValueToUpdate, String strObjName)
 			throws IOException, InterruptedException {
+		System.out.println(element.isDisplayed());
 			try {
-				if (element.isDisplayed() && element.isEnabled()) {
+				if (element.isDisplayed()) {
 					element.clear();
 					if(driver instanceof AndroidDriver) {
 						((AndroidDriver) driver).hideKeyboard();
@@ -243,6 +244,7 @@ public class ReusableFunctions extends BaseClass {
 				} else {
 					Report.updateExtentStatus("Verify if the Element(" + strObjName + ") is present and update",
 							strObjName + " is not enabled", Status.FAIL);
+					
 				}
 			} catch (org.openqa.selenium.NoSuchElementException nsee) {
 				Report.updateExtentStatus("UPDATE ANY ELEMENT : " + strObjName,
@@ -539,8 +541,7 @@ public class ReusableFunctions extends BaseClass {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, 30);
 
-			if (isElementPresentVerification(wait.ignoring(StaleElementReferenceException.class)
-					.until(ExpectedConditions.visibilityOf(element)), strObjName)) {
+			if (element.isDisplayed()) {
 				wait.ignoring(StaleElementReferenceException.class)
 						.until(ExpectedConditions.elementToBeClickable(element)).click();
 				// Thread.sleep(1000);
@@ -552,13 +553,16 @@ public class ReusableFunctions extends BaseClass {
 						Status.FAIL);
 				return false;
 			}
-		} catch (Exception e) {
+		} catch( StaleElementReferenceException es) {
+			System.out.println("Ignoring Stale element exception");
+		}catch (Exception e) {
 			Report.updateExtentStatus("CLICK IF ELEMENT PRESENT",
 					"Error in method - Error Description - " + e.toString(), Status.FAIL);
 			String exception =ExceptionUtils.getFullStackTrace(e);
 			throw new TestExecutionException("No Such Element",exception);
 			
 		}
+		return false;
 	}
 
 	/*
@@ -1164,8 +1168,8 @@ public class ReusableFunctions extends BaseClass {
 	public boolean isElementPresentContainsText(WebElement element, String StrObjName, String textToVerify)
 			throws IOException {
 		try {
-			if (isElementPresentVerification(wait.until(ExpectedConditions.visibilityOf(element)), StrObjName)) {
-				if (wait.until(ExpectedConditions.visibilityOf(element)).getText().contains(textToVerify)) {
+			if (isElementPresentVerification(wait.ignoring(StaleElementReferenceException.class).until(ExpectedConditions.visibilityOf(element)), StrObjName)) {
+				if (wait.ignoring(StaleElementReferenceException.class).until(ExpectedConditions.visibilityOf(element)).getText().contains(textToVerify)) {
 					Report.updateExtentStatus(
 							"The Element(" + StrObjName + ") is present and Contains the text:" + textToVerify,
 							"Successfully verified the presence of text: " + textToVerify, Status.PASS);
@@ -1447,11 +1451,8 @@ public class ReusableFunctions extends BaseClass {
 	public boolean verifyIfElementIsPresent(WebElement elementToFind, String objName) throws IOException {
 
 		try {
-			if (elementToFind == null || (!elementToFind.isDisplayed())) {
-				Report.updateExtentStatus(objName, objName + " element is not displayed", Status.FAIL);
-				return false;
-			}
-			if (elementToFind.isDisplayed()) {
+			if (wait.ignoring(StaleElementReferenceException.class)
+					.until(ExpectedConditions.visibilityOf(elementToFind)).isDisplayed()) {
 				highlightElement(elementToFind);
 				Report.updateExtentStatus(objName, objName + " is displayed", Status.PASS);
 				return true;

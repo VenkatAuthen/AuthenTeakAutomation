@@ -1,6 +1,8 @@
 package com.automation.pages;
 
 import java.io.IOException;
+
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
@@ -8,6 +10,7 @@ import com.automation.componentgroups.*;
 import com.automation.framework.BaseClass;
 import com.automation.framework.Report;
 import com.automation.framework.Status;
+import com.automation.framework.TestExecutionException;
 import com.automation.pageObjects.HomePageObjects;
 import com.automation.pageObjects.MyAccountPageObjects;
 
@@ -69,6 +72,7 @@ public class MyAccountPage extends BaseClass {
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.btnCreateAccount), MyAccountPageObjects.btnCreateAccount.getObjectname());
 		}catch(Exception e) {
 			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 	}
 
@@ -105,6 +109,7 @@ public class MyAccountPage extends BaseClass {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 	}
 	
@@ -119,6 +124,7 @@ public class MyAccountPage extends BaseClass {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 	}
 	
@@ -132,6 +138,7 @@ public class MyAccountPage extends BaseClass {
 			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.txtOrderDate), MyAccountPageObjects.txtOrderDate.getObjectname());
 		}catch(Exception e) {
 			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 		
 	}
@@ -145,9 +152,11 @@ public class MyAccountPage extends BaseClass {
 			String state = dataTable.getData("General_Data", "State");
 			String zip = dataTable.getData("General_Data", "Zip");
 			String phone = dataTable.getData("General_Data", "Phone");
+			driver.navigate().refresh();
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkNavAdresess), MyAccountPageObjects.lnkNavAdresess.getObjectname());			
+			driver.navigate().refresh();
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkNewAddress), MyAccountPageObjects.lnkNewAddress.getObjectname());
-			reusableFunctions.verifyIfElementPresent(getPageElement(MyAccountPageObjects.txtNewAddressHeading), MyAccountPageObjects.txtNewAddressHeading.getObjectname());
+			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.txtNewAddressHeading), MyAccountPageObjects.txtNewAddressHeading.getObjectname());
 			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxNewAddressFirstName),firstName, MyAccountPageObjects.txtBoxNewAddressFirstName.getObjectname());
 			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxNewAddressLastName),lastName, MyAccountPageObjects.txtBoxNewAddressLastName.getObjectname());
 			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxNewAddressAddressline1),addr, MyAccountPageObjects.txtBoxNewAddressAddressline1.getObjectname());
@@ -159,6 +168,7 @@ public class MyAccountPage extends BaseClass {
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.btnSaveAddress), MyAccountPageObjects.btnSaveAddress.getObjectname());
 		}catch(Exception e) {
 			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 	}
 	
@@ -167,6 +177,7 @@ public class MyAccountPage extends BaseClass {
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.btnAddressDelete), MyAccountPageObjects.btnAddressDelete.getObjectname());
 		}catch(Exception e) {
 			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 	}
 
@@ -175,7 +186,9 @@ public class MyAccountPage extends BaseClass {
 			String phone = dataTable.getData("General_Data", "Phone");
 			String email = dataTable.getData("General_Data", "Email");
 			String password = dataTable.getData("General_Data", "Password");
+			driver.navigate().refresh();
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkNavAccountSettings), MyAccountPageObjects.lnkNavAccountSettings.getObjectname());
+			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.titleAccountSettings), MyAccountPageObjects.titleAccountSettings.getObjectname());
 			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxAccountSettingsPhoneNumber),phone, MyAccountPageObjects.txtBoxAccountSettingsPhoneNumber.getObjectname());
 			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxAccountSettingsEmail),email, MyAccountPageObjects.txtBoxAccountSettingsEmail.getObjectname());
 			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxAccountSettingsPassword),password, MyAccountPageObjects.txtBoxAccountSettingsPassword.getObjectname());
@@ -183,8 +196,10 @@ public class MyAccountPage extends BaseClass {
 			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxAccountSettingCurrentPassword),password, MyAccountPageObjects.txtBoxAccountSettingCurrentPassword.getObjectname());
 			reusableFunctions.scrollIntoView(getPageElement(MyAccountPageObjects.txtBoxAccountSettingsPassword));
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.btnUpdateDetails), MyAccountPageObjects.btnUpdateDetails.getObjectname());
+			reusableFunctions.isElementPresentContainsText(getPageElement(MyAccountPageObjects.msgAccountDetailsUpdated), MyAccountPageObjects.msgAccountDetailsUpdated.getObjectname(), "Your account details have been updated.");
 		}catch(Exception e) {
 			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 	}
 	
@@ -194,6 +209,17 @@ public class MyAccountPage extends BaseClass {
 			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.lnkNavRecentlyViewed), MyAccountPageObjects.lnkNavRecentlyViewed.getObjectname());
 		}catch(Exception e) {
 			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
+		}
+	}
+	
+	public void logOut() {
+		try {
+			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkLogOut), MyAccountPageObjects.lnkLogOut.getObjectname());
+			reusableFunctions.isElementPresentContainsText(getPageElement(MyAccountPageObjects.msgLogoutSuccessful), MyAccountPageObjects.msgLogoutSuccessful.getObjectname(), "You've been logged out of your account successfully.");
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
 		}
 	}
 }
