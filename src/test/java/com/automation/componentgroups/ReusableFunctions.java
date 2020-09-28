@@ -229,7 +229,6 @@ public class ReusableFunctions extends BaseClass {
 	@SuppressWarnings("rawtypes")
 	public boolean clearAndEnterText(WebElement element, String strValueToUpdate, String strObjName)
 			throws IOException, InterruptedException {
-		System.out.println(element.isDisplayed());
 			try {
 				if (element.isDisplayed()) {
 					element.clear();

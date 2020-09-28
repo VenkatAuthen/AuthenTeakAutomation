@@ -8,7 +8,7 @@ public enum HomePageObjects implements PageObjects {
         txtBox_SearchProduct("desktop_search_query",ID,"Product Search Text box"),
         closePopUp("//button[@alt='Close form']",XPATH,"Home Page - Covid message pop up"),
         link_MyAccount("//span[@class='button-text']",XPATH,"Home Page - My Account Link"),
-        logoHomePage("//div[@class='h1 site-branding has-logo']/a/img",XPATH,"Home Page - Logo"),
+        logoHomePage("//div[@class='container site-header--container']/div[1]/h1/a/img",XPATH,"Home Page - Logo"),
        
         ;
 		

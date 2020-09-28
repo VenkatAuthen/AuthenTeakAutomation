@@ -48,7 +48,7 @@ public class TC02_MultipeSwatchProductCheckout extends BaseClass {
 	}
 
 	@Test
-	public void verifySimpleProductCheckout() throws Exception {
+	public void verifyMultipleSwatchProductCheckout() throws Exception {
 		try {
 			homePage.invokeApplication();
 			homePage.searchProduct();

@@ -70,6 +70,7 @@ public class MyAccountPage extends BaseClass {
 	public void navigateToCreateAccount() {
 		try {
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.btnCreateAccount), MyAccountPageObjects.btnCreateAccount.getObjectname());
+			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.titleCreateAccount), MyAccountPageObjects.titleCreateAccount.getObjectname());
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
@@ -98,12 +99,9 @@ public class MyAccountPage extends BaseClass {
 			reusableFunctions.selectAnyElementByValue(getPageElement(MyAccountPageObjects.selectDrpDownState), state, MyAccountPageObjects.selectDrpDownState.getObjectname());
 			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxZipCode), zip, MyAccountPageObjects.txtBoxZipCode.getObjectname());
 			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxPhoneNumber), phone, MyAccountPageObjects.txtBoxPhoneNumber.getObjectname());
-			reusableFunctions.scrollIntoView(getPageElement(MyAccountPageObjects.txtBoxFirstName));
+			reusableFunctions.scrollIntoView(getPageElement(MyAccountPageObjects.txtBoxCity));
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.btnCreateNewAccount), MyAccountPageObjects.btnCreateNewAccount.getObjectname());
-			
-			reusableFunctions.isElementPresentContainsText(getPageElement(MyAccountPageObjects.titleAccountCreated), MyAccountPageObjects.titleAccountCreated.getObjectname(), "Account Created");
 			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.descAccountCreated), MyAccountPageObjects.descAccountCreated.getObjectname());
-			
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.btnContinue), MyAccountPageObjects.btnContinue.getObjectname());
 			reusableFunctions.verifyIfElementPresent(getPageElement(HomePageObjects.logoHomePage), HomePageObjects.logoHomePage.getObjectname());
 			
@@ -130,12 +128,12 @@ public class MyAccountPage extends BaseClass {
 	
 	public void verifyOrdersInYourAccount() {
 		try {
-			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.headingOrders), MyAccountPageObjects.headingOrders.getObjectname());
-			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.ordersblock), MyAccountPageObjects.ordersblock.getObjectname());
-			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.orderNumber), MyAccountPageObjects.orderNumber.getObjectname());
-			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.noOfItems), MyAccountPageObjects.noOfItems.getObjectname());
-			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.txtPlaced), MyAccountPageObjects.txtPlaced.getObjectname());
-			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.txtOrderDate), MyAccountPageObjects.txtOrderDate.getObjectname());
+			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.headingOrders), MyAccountPageObjects.headingOrders.getObjectname());
+			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.ordersblock), MyAccountPageObjects.ordersblock.getObjectname());
+			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.orderNumber), MyAccountPageObjects.orderNumber.getObjectname());
+			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.noOfItems), MyAccountPageObjects.noOfItems.getObjectname());
+			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.txtPlaced), MyAccountPageObjects.txtPlaced.getObjectname());
+			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.txtOrderDate), MyAccountPageObjects.txtOrderDate.getObjectname());
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
@@ -156,6 +154,7 @@ public class MyAccountPage extends BaseClass {
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkNavAdresess), MyAccountPageObjects.lnkNavAdresess.getObjectname());			
 			driver.navigate().refresh();
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkNewAddress), MyAccountPageObjects.lnkNewAddress.getObjectname());
+			Thread.sleep(5000);
 			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.txtNewAddressHeading), MyAccountPageObjects.txtNewAddressHeading.getObjectname());
 			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxNewAddressFirstName),firstName, MyAccountPageObjects.txtBoxNewAddressFirstName.getObjectname());
 			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxNewAddressLastName),lastName, MyAccountPageObjects.txtBoxNewAddressLastName.getObjectname());
@@ -188,6 +187,7 @@ public class MyAccountPage extends BaseClass {
 			String password = dataTable.getData("General_Data", "Password");
 			driver.navigate().refresh();
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkNavAccountSettings), MyAccountPageObjects.lnkNavAccountSettings.getObjectname());
+			Thread.sleep(5000);
 			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.titleAccountSettings), MyAccountPageObjects.titleAccountSettings.getObjectname());
 			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxAccountSettingsPhoneNumber),phone, MyAccountPageObjects.txtBoxAccountSettingsPhoneNumber.getObjectname());
 			reusableFunctions.clearAndEnterText(getPageElement(MyAccountPageObjects.txtBoxAccountSettingsEmail),email, MyAccountPageObjects.txtBoxAccountSettingsEmail.getObjectname());
@@ -206,7 +206,7 @@ public class MyAccountPage extends BaseClass {
 	public void validateRecentlyViewed() {
 		try {
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkNavRecentlyViewed), MyAccountPageObjects.lnkNavRecentlyViewed.getObjectname());
-			reusableFunctions.isElementPresentVerification(getPageElement(MyAccountPageObjects.lnkNavRecentlyViewed), MyAccountPageObjects.lnkNavRecentlyViewed.getObjectname());
+			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.imgRecentlyViewedItem), MyAccountPageObjects.imgRecentlyViewedItem.getObjectname());
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
@@ -216,7 +216,7 @@ public class MyAccountPage extends BaseClass {
 	public void logOut() {
 		try {
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkLogOut), MyAccountPageObjects.lnkLogOut.getObjectname());
-			reusableFunctions.isElementPresentContainsText(getPageElement(MyAccountPageObjects.msgLogoutSuccessful), MyAccountPageObjects.msgLogoutSuccessful.getObjectname(), "You've been logged out of your account successfully.");
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));

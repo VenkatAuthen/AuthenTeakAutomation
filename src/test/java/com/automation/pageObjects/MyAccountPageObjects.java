@@ -8,8 +8,10 @@ public enum MyAccountPageObjects implements PageObjects {
         btnCreateAccount("//a[@class='button account-button-primary']",XPATH,"My Account Page - Create Account Button"),
         popUp("//button[@alt='Close form']",XPATH,"My Account Page - Close pop up"),
         lnkLogOut("//a[@class='top-bar-button']",XPATH,"My Account Page - Logout Link"),
-        msgLogoutSuccessful("//div[@class='alert-message']",XPATH,"My Account Page - Logout Successful message"),
+        msgLogoutSuccessful("//div[@class='alert alert-success']/div",XPATH,"My Account Page - Logout Successful message"),
+        lnkHome("HOME",LINKTEXT,"Logged Out Page - Home Link"),
         //Create Account
+        titleCreateAccount("//div[@class='h1 account-heading']",XPATH,"Create Account Page - Tile Create Account"),
         txtBoxemail("input-FormField_1",ID,"My Account - Create Account Page - Email Text Field"),
         txtBoxPassword("password-FormField_2",ID,"My Account - Create Account Page - Password Text Field"),
         txtBoxConfirmPassword("password-FormField_3",ID,"My Account - Create Account Page - Confirm Password Text Field"),
@@ -33,6 +35,7 @@ public enum MyAccountPageObjects implements PageObjects {
         btnContinue("//a[@class='button account-button-primary']",XPATH,"My Account - Account Created Page - Continue Button"),
         
         //Login Page
+        txtLogin("//h2[@class='account-sub-heading']",XPATH,"Login Page - Title - Log in"),
         txtBoxLoginUsernameEmail("input-login_email",ID,"Login Page - Username - Email Text Box"),
         txtBoxLoginPassword("password-login_pass",ID,"Login Page - Password Text Box "),
         btnLogin("//input[@value='Log In']",XPATH,"Login Page - Login Button"),
@@ -50,7 +53,7 @@ public enum MyAccountPageObjects implements PageObjects {
         lnkViewStatusDetails("//div[@class='account-item-badge']/p/a",XPATH,"Your Account Page - Order - View Status Details"),
         
         lnkNavAdresess("//ul[@class='account-nav-list']/li[3]/a",XPATH,"Your Account Page - Nav Link - Addresses"),
-        lnkNavRecentlyViewed("//ul[@class='account-nav-list']/li[4]/a",XPATH,"Your Account Page - Nav Link - Recently Viewed"),
+        lnkNavRecentlyViewed("RECENTLY VIEWED",LINKTEXT,"Your Account Page - Nav Link - Recently Viewed"),
         lnkNavAccountSettings("//ul[@class='account-nav-list']/li[5]/a",XPATH,"Your Account Page - Nav Link - Account Settings"),
         
         //Address
@@ -58,10 +61,10 @@ public enum MyAccountPageObjects implements PageObjects {
         btnAddressDelete("//div[@class='account-item-actions']/form/button",XPATH,"Your Account Addresses - Delete Button"),
         txtAddressNameHeading("//h1[@class='account-item-title account-item-title-large']",XPATH,"Your Account Addresses - Name in Address field"),
         txtAddress("//div[@class='account-item-details']",XPATH,"Your Account - Address section - Address"),
-        lnkNewAddress("//a[@class='account-tool']",XPATH,"Your Account - Address Seciton - New Address Link"),
+        lnkNewAddress("New Address",LINKTEXT,"Your Account - Address Seciton - New Address Link"),
         
         //New Address
-        txtNewAddressHeading("//div[@class='h1 account-heading']",XPATH,"Your Account - New Address Heading"),
+        txtNewAddressHeading("//div[@class='account-header']/div[1]",XPATH,"Your Account - New Address Heading"),
         txtBoxNewAddressFirstName("input-FormField_4",ID,"Your Account - New Adresses - First Name Text Box"),
         txtBoxNewAddressLastName("input-FormField_5",ID,"Your Account - New Adresses Last Name Text Box "),
         txtBoxNewAddressAddressline1("input-FormField_8",ID,"Your Account - New Addresses - Address Line 1"),
@@ -76,7 +79,7 @@ public enum MyAccountPageObjects implements PageObjects {
         imgRecentlyViewedItem("//figure",XPATH,"Your Account - Recently Viewed - Item"),
         
         //Account Settings
-        titleAccountSettings("//div[@class='h1 account-heading']",XPATH,"My Account Page - Account Settings page Heading"),
+        titleAccountSettings("//div[@class='account-header']/div[1]",XPATH,"My Account Page - Account Settings page Heading"),
         txtBoxAccountSettingsPhoneNumber("//input[@name='account_phone']",XPATH,"Your Account - Account Settings - Phone Number Text Box"),
         txtBoxAccountSettingsEmail("input-FormField_1",ID,"Your Account - Account Settings - Email Text Box"),
         txtBoxAccountSettingsPassword("password-FormField_2",ID,"Your Account - Account Settings - Password text box"),

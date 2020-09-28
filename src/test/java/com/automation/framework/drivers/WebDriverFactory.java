@@ -61,7 +61,7 @@ public class WebDriverFactory {
 			cOptions.addArguments("--ignore-certificate-errors");
 			cOptions.addArguments("--disable-web-security");
 			cOptions.addArguments("--enable-javascript");
-			driver = new ChromeDriver(cOptions);
+			driver = new ChromeDriver();
 			driver.manage().timeouts().setScriptTimeout(3L, TimeUnit.SECONDS);
 			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -73,6 +73,9 @@ public class WebDriverFactory {
 			FirefoxOptions options = new FirefoxOptions();
 			options.addPreference("javascript.enabled", true);
 			driver = new FirefoxDriver(options);
+			driver.manage().timeouts().setScriptTimeout(30L, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			break;
 
 		case GHOST_DRIVER:

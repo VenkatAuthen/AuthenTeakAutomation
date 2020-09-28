@@ -1,0 +1,43 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Smoke Tests"  data-provider-thread-count="1" >
+
+	<test name="Test for Authenteak Website">
+
+	<!-- Allowed Values For Execution Mode: LOCAL, GRID, MOBILE, PERFECTO, SAUCELABS, BROWSERSTACK  -->
+	<parameter name="executionMode" value="LOCAL"/>
+	
+	<!-- Allowed Values For ToolName: empty string, APPIUM, REMOTE_WEBDRIVER-->
+	<parameter name="toolName" value=""/>
+	
+	<!-- Allowed Values For Mobile Execution Platform: empty string, ANDROID, IOS, WEB_ANDROID, WEB_IOS-->
+	<parameter name="mobileExecutionPlatform" value=""/>
+	
+	<!-- Allowed Values For Mobile OS Version: Required OS Version-->
+	<parameter name="mobileOsVersion" value=""/>
+	
+	<!-- Allowed Values For Device Name: Name of the Device-->
+	<parameter name="deviceName" value=""/>
+	
+	<!-- Allowed Values For Browser: CHROME, FIREFOX, GHOST_DRIVER, INTERNET_EXPLORER, SAFARI, EDGE-->
+	<parameter name="browser" value="EDGE"/>
+	
+	<!-- Allowed Values For Browser Version: Required Version else empty string-->
+	<parameter name="browserVersion" value =""/>
+	
+	<!-- Allowed Values For Platform: ANY, LINUX, MAC, MAVERICKS, MOUNTAIN_LION, SNOW_LEAPARD, UNIX, VISTA, WIN8, WIN8_1, WINDOWS, XP-->
+	<parameter name="platform" value=""/>
+	
+	<!-- Allowed Values For Platform Version: Required Version else empty string-->
+	<parameter name="platformVersion" value="10"/>
+	
+	<!-- Allowed Values For Platform Version: Required Version else empty string-->
+	<parameter name="dataTableName" value="Website_Validations"/>
+		<classes>
+			<class name="testscripts.smokeTests.TC01_SimpleProductCheckout"/>
+			<class name="testscripts.smokeTests.TC02_MultipeSwatchProductCheckout"/>
+			<class name="testscripts.smokeTests.TC03_CreateAccount"/>
+			<class name="testscripts.smokeTests.TC04_BrokenLinksValidation"/>
+			<class name="testscripts.smokeTests.TC05_ValidateAccountPage"/>
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->

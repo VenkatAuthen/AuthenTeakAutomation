@@ -62,7 +62,7 @@ public class ProductPage extends BaseClass {
 		reusableFunctions.clickIfElementPresent(getPageElement(ProductPageObjects.cushion), ProductPageObjects.cushion.getObjectname());
 		reusableFunctions.clickIfElementPresent(getPageElement(ProductPageObjects.btn_saveAndBack), ProductPageObjects.btn_saveAndBack.getObjectname());
 		reusableFunctions.clearAndEnterText(getPageElement(ProductPageObjects.txtBox_productQuantity), quantity, ProductPageObjects.txtBox_productQuantity.getObjectname());
-		reusableFunctions.scrollIntoView(getPageElement(ProductPageObjects.lnkLearnMoreLoan));
+		reusableFunctions.scrollIntoView(getPageElement(ProductPageObjects.btn_selectCushion));
 		reusableFunctions.clickIfElementPresent(getPageElement(ProductPageObjects.btn_addToCart), ProductPageObjects.btn_addToCart.getObjectname());
 		reusableFunctions.isElementPresentContainsText(getPageElement(ProductPageObjects.addedToCartTitle), ProductPageObjects.addedToCartTitle.getObjectname(), "Added to your Cart");
 		}catch(Exception e) {
@@ -104,12 +104,15 @@ public class ProductPage extends BaseClass {
 			reusableFunctions.clickIfElementPresent(getPageElement(ProductPageObjects.btn_saveAndBack), ProductPageObjects.btn_saveAndBack.getObjectname());
 			reusableFunctions.scrollIntoView(getPageElement(ProductPageObjects.title_productName));
 			reusableFunctions.selectAnyElement(getPageElement(ProductPageObjects.selectProtectionCoverDropDown), 2, ProductPageObjects.selectProtectionCoverDropDown.getObjectname());
+			Thread.sleep(1000);
 			String updatedProductCost = reusableFunctions.getTextFromElement(getPageElement(ProductPageObjects.productCost));
 			double updatedcost = Double.parseDouble(StringUtils.remove(StringUtils.substring(updatedProductCost, 1),","));
+			System.out.println("Updated Cost:"+updatedcost);
+			System.out.println("calculated Updated Cost:"+(108+defautcost));
 			if(updatedcost==(108+defautcost)) {
 				Report.updateExtentStatus("", "The cost is updated based on the selection of Protection Cover", Status.PASS);
 			}else {
-				Report.updateExtentStatus("", "The cost is NOT updated based on the selection of Protection Cover", Status.FAIL);
+				Report.updateExtentStatus("", "The cost is NOT updated based on the selection of Protection Cover:", Status.FAIL);
 			}
 			dataTable.putData("General_Data","Product_Cost",updatedProductCost);
 			reusableFunctions.clearAndEnterText(getPageElement(ProductPageObjects.txtBox_productQuantity), quantity, ProductPageObjects.txtBox_productQuantity.getObjectname());

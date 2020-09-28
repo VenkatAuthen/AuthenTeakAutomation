@@ -43,7 +43,7 @@ public class TC03_CreateAccount extends BaseClass {
 	}
 
 	@Test
-	public void verifySimpleProductCheckout() throws Exception {
+	public void verifyCreateAccountFlow() throws Exception {
 		try {
 			homePage.invokeApplication();
 			homePage.navigateToMyAccountPage();
