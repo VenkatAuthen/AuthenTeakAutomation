@@ -58,7 +58,7 @@ public enum MyAccountPageObjects implements PageObjects {
         
         //Address
         btnAddressEdit("//div[@class='account-item-actions']/form/a",XPATH,"Your Account - Addresses - Edit Button"),
-        btnAddressDelete("//div[@class='account-item-actions']/form/button",XPATH,"Your Account Addresses - Delete Button"),
+        btnAddressDelete("(//div[@class='account-item-actions']/form/button)[1]",XPATH,"Your Account Addresses - Delete Button"),
         txtAddressNameHeading("//h1[@class='account-item-title account-item-title-large']",XPATH,"Your Account Addresses - Name in Address field"),
         txtAddress("//div[@class='account-item-details']",XPATH,"Your Account - Address section - Address"),
         lnkNewAddress("New Address",LINKTEXT,"Your Account - Address Seciton - New Address Link"),

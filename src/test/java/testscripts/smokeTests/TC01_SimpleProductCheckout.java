@@ -34,7 +34,7 @@ public class TC01_SimpleProductCheckout extends BaseClass {
 			"browserVersion", "platform", "platformVersion", "dataTableName" })
 	public void setUp(@Optional("LOCAL") String executionMode, @Optional("") String toolName,
 			@Optional("") String mobileExecutionPlatform, @Optional("") String mobileOsVersion,
-			@Optional("") String deviceName, @Optional("FIREFOX") String browser, @Optional("") String browserVersion,
+			@Optional("") String deviceName, @Optional("EDGE") String browser, @Optional("") String browserVersion,
 			@Optional("") String platform, @Optional("") String platformVersion,
 			@Optional("Website_Validations") String dataTableName) {
 		initializeWebDriver(executionMode, toolName, mobileExecutionPlatform, mobileOsVersion, deviceName, browser,

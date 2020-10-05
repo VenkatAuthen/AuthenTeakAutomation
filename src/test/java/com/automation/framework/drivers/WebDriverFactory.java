@@ -63,8 +63,6 @@ public class WebDriverFactory {
 			cOptions.addArguments("--enable-javascript");
 			driver = new ChromeDriver();
 			driver.manage().timeouts().setScriptTimeout(3L, TimeUnit.SECONDS);
-			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			break;
 
 		case FIREFOX:
@@ -74,8 +72,6 @@ public class WebDriverFactory {
 			options.addPreference("javascript.enabled", true);
 			driver = new FirefoxDriver(options);
 			driver.manage().timeouts().setScriptTimeout(30L, TimeUnit.SECONDS);
-			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			break;
 
 		case GHOST_DRIVER:

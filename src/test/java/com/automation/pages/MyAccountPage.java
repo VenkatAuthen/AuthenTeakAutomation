@@ -134,6 +134,8 @@ public class MyAccountPage extends BaseClass {
 			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.noOfItems), MyAccountPageObjects.noOfItems.getObjectname());
 			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.txtPlaced), MyAccountPageObjects.txtPlaced.getObjectname());
 			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.txtOrderDate), MyAccountPageObjects.txtOrderDate.getObjectname());
+			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.orderStatus), MyAccountPageObjects.orderStatus.getObjectname());
+			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.lnkViewStatusDetails), MyAccountPageObjects.lnkViewStatusDetails.getObjectname());
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
@@ -150,9 +152,7 @@ public class MyAccountPage extends BaseClass {
 			String state = dataTable.getData("General_Data", "State");
 			String zip = dataTable.getData("General_Data", "Zip");
 			String phone = dataTable.getData("General_Data", "Phone");
-			driver.navigate().refresh();
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkNavAdresess), MyAccountPageObjects.lnkNavAdresess.getObjectname());			
-			driver.navigate().refresh();
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkNewAddress), MyAccountPageObjects.lnkNewAddress.getObjectname());
 			Thread.sleep(5000);
 			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.txtNewAddressHeading), MyAccountPageObjects.txtNewAddressHeading.getObjectname());
@@ -173,7 +173,8 @@ public class MyAccountPage extends BaseClass {
 	
 	public void deleteAddress() {
 		try {
-			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.btnAddressDelete), MyAccountPageObjects.btnAddressDelete.getObjectname());
+			Thread.sleep(5000);
+			reusableFunctions.clickIfElementPresentJavaScript(getPageElement(MyAccountPageObjects.btnAddressDelete), MyAccountPageObjects.btnAddressDelete.getObjectname());
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new TestExecutionException("Exception: "+e.getMessage(),ExceptionUtils.getFullStackTrace(e));
@@ -185,7 +186,6 @@ public class MyAccountPage extends BaseClass {
 			String phone = dataTable.getData("General_Data", "Phone");
 			String email = dataTable.getData("General_Data", "Email");
 			String password = dataTable.getData("General_Data", "Password");
-			driver.navigate().refresh();
 			reusableFunctions.clickIfElementPresent(getPageElement(MyAccountPageObjects.lnkNavAccountSettings), MyAccountPageObjects.lnkNavAccountSettings.getObjectname());
 			Thread.sleep(5000);
 			reusableFunctions.verifyIfElementIsPresent(getPageElement(MyAccountPageObjects.titleAccountSettings), MyAccountPageObjects.titleAccountSettings.getObjectname());

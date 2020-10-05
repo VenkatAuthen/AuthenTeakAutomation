@@ -71,6 +71,7 @@ public class ProductListingPage extends BaseClass {
 
 	public void clickOnFirstProduct() throws IOException {
 		try {
+			Thread.sleep(5000);
 		reusableFunctions.clickIfElementPresent(getPageElement(ProductListingPageObjects.firstProduct), ProductListingPageObjects.firstProduct.getObjectname());
 		if (reusableFunctions.verifyIfElementIsPresent(getPageElement(ProductPageObjects.title_customizeProduct),
 				ProductPageObjects.title_customizeProduct.getObjectname())) {
